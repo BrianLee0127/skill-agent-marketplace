@@ -1,0 +1,16 @@
+{
+  "_comment": "Maps skill name to category when the SKILL.md has no 'category:' in frontmatter. Categories: UI & Design, Backend, MCP & Tools, Others",
+  "brandkit": "UI & Design",
+  "design-taste-frontend": "UI & Design",
+  "design-taste-frontend-v1": "UI & Design",
+  "full-output-enforcement": "Others",
+  "gpt-taste": "UI & Design",
+  "high-end-visual-design": "UI & Design",
+  "image-to-code": "UI & Design",
+  "imagegen-frontend-mobile": "UI & Design",
+  "imagegen-frontend-web": "UI & Design",
+  "industrial-brutalist-ui": "UI & Design",
+  "minimalist-ui": "UI & Design",
+  "redesign-existing-projects": "UI & Design",
+  "stitch-design-taste": "UI & Design"
+}

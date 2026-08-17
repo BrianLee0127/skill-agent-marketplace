@@ -10,57 +10,105 @@
   body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,sans-serif; line-height:1.5; }
   .wrap { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
   h1 { font-size:clamp(26px,4vw,38px); letter-spacing:-0.02em; }
-  .sub { color:var(--dim); margin-top:6px; }
+  .sub { color:var(--dim); margin-top:6px; font-size:14px; }
+  code { background:var(--card); padding:2px 7px; border-radius:6px; font-size:13px; }
   input {
-    width:100%; margin:26px 0 30px; padding:14px 18px; font-size:16px;
+    width:100%; margin:24px 0 20px; padding:14px 18px; font-size:16px;
     background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--text); outline:none;
   }
   input:focus { border-color:var(--accent); }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }
-  .card {
-    display:block; background:var(--card); border:1px solid var(--line); border-radius:12px;
-    padding:18px; color:inherit; text-decoration:none; transition:border-color .2s, transform .2s;
+  .crumbs { margin-bottom:18px; font-size:14px; color:var(--dim); min-height:20px; }
+  .crumbs a { color:var(--accent); text-decoration:none; cursor:pointer; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+  .folder, .card {
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px;
+    color:inherit; text-decoration:none; display:block; cursor:pointer;
+    transition:border-color .2s, transform .2s;
   }
-  .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .folder:hover, .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .folder .ico { font-size:30px; }
+  .folder h3 { margin-top:10px; font-size:18px; }
+  .folder p { color:var(--dim); font-size:13.5px; margin-top:4px; }
   .kind, .plug {
     display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
     padding:3px 9px; border-radius:999px; margin-right:6px;
   }
   .kind { background:rgba(77,163,255,.14); color:var(--accent); }
   .plug { background:rgba(255,255,255,.06); color:var(--dim); }
-  h3 { margin-top:10px; font-size:17px; }
+  .card h3 { margin-top:10px; font-size:16.5px; }
   .card p { margin-top:6px; font-size:13.5px; color:var(--dim); }
-  .none { color:var(--dim); display:none; }
+  .none { color:var(--dim); margin-top:20px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Skill Catalog</h1>
-  <p class="sub">Click any card to view it on GitHub. Install via <code>/plugin marketplace add BrianLee0127/skill-agent-marketplace</code></p>
-  <input id="q" type="search" placeholder="Search skills..." />
-  <div class="grid" id="grid"><a class="card" data-text="brandkit premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. optimized for intentional logo concepting, refined composition, sparse typography, strong symbolic meaning, premium mockups, art-directed imagery, and flexible grid layouts. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/brandkit" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>brandkit</h3><p>Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultu</p></a>
-<a class="card" data-text="design-taste-frontend anti-slop frontend skill for landing pages, portfolios, and redesigns. the agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. real design systems when applicable, audit-first on redesigns, strict pre-flight check. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/design-taste-frontend" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>design-taste-frontend</h3><p>Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, a</p></a>
-<a class="card" data-text="design-taste-frontend-v1 the original v1 taste-skill, preserved for projects depending on its exact behavior. the current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. use this v1 install name only if you need exact backward compatibility. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/design-taste-frontend-v1" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>design-taste-frontend-v1</h3><p>The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you </p></a>
-<a class="card" data-text="full-output-enforcement overrides default llm truncation behavior. enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. apply to any task requiring exhaustive, unabridged output. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/full-output-enforcement" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>full-output-enforcement</h3><p>Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.</p></a>
-<a class="card" data-text="gpt-taste elite ux/ui &amp; advanced gsap motion engineer. enforces python-driven true randomization for layout variance, strict aida page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict gsap scrolltriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/gpt-taste" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>gpt-taste</h3><p>Elite UX/UI &amp; Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP Scro</p></a>
-<a class="card" data-text="high-end-visual-design teaches the ai to design like a high-end agency. defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. blocks all the common defaults that make ai designs look cheap or generic. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/high-end-visual-design" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>high-end-visual-design</h3><p>Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look che</p></a>
-<a class="card" data-text="image-to-code elite website image-to-code skill for codex. for visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. in codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards ui, and keep the hero clean, spacious, readable, and visible on a small laptop. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/image-to-code" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>image-to-code</h3><p>Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In C</p></a>
-<a class="card" data-text="imagegen-frontend-mobile elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. designed for ios, android, and cross-platform mobile products. prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing. by default, screens should be shown inside a subtle premium iphone or similar phone mockup with a visible frame, while the main focus stays on the app content itself. this skill generates images only. it does not write code. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/imagegen-frontend-mobile" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>imagegen-frontend-mobile</h3><p>Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, s</p></a>
-<a class="card" data-text="imagegen-frontend-web elite frontend image-direction skill for generating premium, conversion-aware website design references. critical output rule — generate one separate horizontal image for every section. a landing page with 8 sections produces 8 images. never compress multiple sections into one image. enforces composition variety (not always left-text / right-image), background-image freedom, varied ctas, varied hero scales (giant / mid / mini minimalist), narrative concept spine, second-read moments, and a single consistent palette across all images. optimized for landing pages, marketing sites, and product comps that developers or coding models can accurately recreate. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/imagegen-frontend-web" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>imagegen-frontend-web</h3><p>Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections pro</p></a>
-<a class="card" data-text="industrial-brutalist-ui raw mechanical interfaces fusing swiss typographic print with military terminal aesthetics. rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. for data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/industrial-brutalist-ui" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>industrial-brutalist-ui</h3><p>Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, </p></a>
-<a class="card" data-text="minimalist-ui clean editorial-style interfaces. warm monochrome palette, typographic contrast, flat bento grids, muted pastels. no gradients, no heavy shadows. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/minimalist-ui" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>minimalist-ui</h3><p>Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.</p></a>
-<a class="card" data-text="redesign-existing-projects upgrades existing websites and apps to premium quality. audits current design, identifies generic ai patterns, and applies high-end design standards without breaking functionality. works with any css framework or vanilla css. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/redesign-existing-projects" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>redesign-existing-projects</h3><p>Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla</p></a>
-<a class="card" data-text="stitch-design-taste semantic design system skill for google stitch. generates agent-friendly design.md files that enforce premium, anti-generic ui standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance. design-skills" href="https://github.com/BrianLee0127/skill-agent-marketplace/tree/main/design-skills/skills/stitch-design-taste" target="_blank" rel="noopener"><span class="kind">skill</span><span class="plug">design-skills</span><h3>stitch-design-taste</h3><p>Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, </p></a></div>
-  <p class="none" id="none">No match found.</p>
+  <p class="sub">Install via <code>/plugin marketplace add BrianLee0127/skill-agent-marketplace</code></p>
+  <input id="q" type="search" placeholder="Search all skills..." />
+  <div class="crumbs" id="crumbs"></div>
+  <div class="grid" id="grid"></div>
+  <p class="none" id="none" style="display:none">Nothing here yet.</p>
 </div>
 <script>
-  const q = document.getElementById("q"), cards = [...document.querySelectorAll(".card")];
-  q.addEventListener("input", () => {
-    const t = q.value.trim().toLowerCase();
-    let shown = 0;
-    cards.forEach(c => { const hit = !t || c.dataset.text.includes(t); c.style.display = hit ? "" : "none"; if (hit) shown++; });
-    document.getElementById("none").style.display = shown ? "none" : "block";
-  });
+const DATA = [{"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "brandkit", "description": "Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. Optimized for intentional logo concepting, refined composition, sparse typography, strong symbolic meaning, premium mockups, art-directed imagery, and flexible grid layouts.", "path": "design-skills/skills/brandkit"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "design-taste-frontend", "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.", "path": "design-skills/skills/design-taste-frontend"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "design-taste-frontend-v1", "description": "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility.", "path": "design-skills/skills/design-taste-frontend-v1"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "Others", "name": "full-output-enforcement", "description": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.", "path": "design-skills/skills/full-output-enforcement"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "gpt-taste", "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing.", "path": "design-skills/skills/gpt-taste"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "high-end-visual-design", "description": "Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic.", "path": "design-skills/skills/high-end-visual-design"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "image-to-code", "description": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards UI, and keep the hero clean, spacious, readable, and visible on a small laptop.", "path": "design-skills/skills/image-to-code"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "imagegen-frontend-mobile", "description": "Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing. By default, screens should be shown inside a subtle premium iPhone or similar phone mockup with a visible frame, while the main focus stays on the app content itself. This skill generates images only. It does not write code.", "path": "design-skills/skills/imagegen-frontend-mobile"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "imagegen-frontend-web", "description": "Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one image. Enforces composition variety (not always left-text / right-image), background-image freedom, varied CTAs, varied hero scales (giant / mid / mini minimalist), narrative concept spine, second-read moments, and a single consistent palette across all images. Optimized for landing pages, marketing sites, and product comps that developers or coding models can accurately recreate.", "path": "design-skills/skills/imagegen-frontend-web"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "industrial-brutalist-ui", "description": "Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints.", "path": "design-skills/skills/industrial-brutalist-ui"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "minimalist-ui", "description": "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.", "path": "design-skills/skills/minimalist-ui"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "redesign-existing-projects", "description": "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS.", "path": "design-skills/skills/redesign-existing-projects"}, {"group": "External tools", "plugin": "design-skills", "kind": "skill", "category": "UI & Design", "name": "stitch-design-taste", "description": "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance.", "path": "design-skills/skills/stitch-design-taste"}];
+const GH = "https://github.com/BrianLee0127/skill-agent-marketplace";
+const ICONS = { "External tools": "\uD83D\uDCE6", "My own": "\uD83D\uDEE0\uFE0F",
+  "UI & Design": "\uD83C\uDFA8", "Backend": "\u2699\uFE0F", "MCP & Tools": "\uD83D\uDD0C", "Others": "\uD83D\uDCC1" };
+const CAT_ORDER = ["UI & Design", "Backend", "MCP & Tools", "Others"];
+const GROUP_LIST = ["External tools", "My own"];
+const grid = document.getElementById("grid"), crumbs = document.getElementById("crumbs"),
+      none = document.getElementById("none"), q = document.getElementById("q");
+
+function esc(s){ const d = document.createElement("span"); d.textContent = s; return d.innerHTML; }
+function state(){
+  const h = decodeURIComponent(location.hash.replace(/^#\/?/, ""));
+  const [g, c] = h.split("/");
+  return { g: g || null, c: c || null };
+}
+function folder(icon, title, sub, href){
+  return '<a class="folder" href="' + href + '"><span class="ico">' + icon + "</span><h3>" +
+    esc(title) + "</h3><p>" + esc(sub) + "</p></a>";
+}
+function card(i){
+  return '<a class="card" href="' + GH + "/tree/main/" + i.path + '" target="_blank" rel="noopener">' +
+    '<span class="kind">' + esc(i.kind) + '</span><span class="plug">' + esc(i.plugin) + "</span>" +
+    "<h3>" + esc(i.name) + "</h3><p>" + esc(i.description.slice(0, 220)) + "</p></a>";
+}
+function render(){
+  const t = q.value.trim().toLowerCase();
+  let out = "", crumbHtml = "";
+  if (t) {
+    const hits = DATA.filter(i => (i.name + " " + i.description + " " + i.category + " " + i.plugin).toLowerCase().includes(t));
+    out = hits.map(card).join("");
+    crumbHtml = 'Search results (' + hits.length + ') \u00b7 <a href="#" onclick="q.value=\'\';render();return false;">clear</a>';
+  } else {
+    const { g, c } = state();
+    if (!g) {
+      const groups = [...new Set([...GROUP_LIST, ...DATA.map(i => i.group)])];
+      out = groups.map(gr => {
+        const n = DATA.filter(i => i.group === gr).length;
+        return folder(ICONS[gr] || "\uD83D\uDCC1", gr, n + " items", "#" + encodeURIComponent(gr));
+      }).join("");
+    } else if (!c) {
+      crumbHtml = '<a href="#">All</a> \u203a ' + esc(g);
+      const cats = [...new Set(DATA.filter(i => i.group === g).map(i => i.category))]
+        .sort((a, b) => (CAT_ORDER.indexOf(a) + 99) - (CAT_ORDER.indexOf(b) + 99));
+      out = cats.map(cat => {
+        const n = DATA.filter(i => i.group === g && i.category === cat).length;
+        return folder(ICONS[cat] || "\uD83D\uDCC1", cat, n + " items", "#" + encodeURIComponent(g) + "/" + encodeURIComponent(cat));
+      }).join("");
+    } else {
+      crumbHtml = '<a href="#">All</a> \u203a <a href="#' + encodeURIComponent(g) + '">' + esc(g) + "</a> \u203a " + esc(c);
+      out = DATA.filter(i => i.group === g && i.category === c).map(card).join("");
+    }
+  }
+  grid.innerHTML = out;
+  crumbs.innerHTML = crumbHtml;
+  none.style.display = out ? "none" : "block";
+}
+window.addEventListener("hashchange", render);
+q.addEventListener("input", render);
+render();
 </script>
 </body>
 </html>
