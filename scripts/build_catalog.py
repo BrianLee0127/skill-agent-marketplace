@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Rebuild README.md and docs/index.html from the plugins' skill/agent/command files."""
-import json, html, re
+import json, re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 GH = "https://github.com/BrianLee0127/skill-agent-marketplace"
-GROUPS = {"design-skills": "External tools", "team-toolkit": "My own"}
 DEFAULT_CATEGORY = "Others"
 
 
@@ -27,46 +26,44 @@ def frontmatter(path):
 
 def collect():
     mp = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
-    cat_map = {}
     cat_file = ROOT / "categories.json"
+    cat_map = {}
     if cat_file.exists():
         cat_map = {k: v for k, v in json.loads(cat_file.read_text()).items() if not k.startswith("_")}
 
-    items = []
+    packages, items = [], []
     for entry in mp["plugins"]:
         pdir = ROOT / entry["source"].lstrip("./")
-        group = GROUPS.get(entry["name"], "My own")
+        packages.append({"name": entry["name"], "description": entry["description"]})
         for sk in sorted((pdir / "skills").glob("*/SKILL.md")):
             fm = frontmatter(sk)
             name = fm.get("name", sk.parent.name)
             items.append({
-                "group": group, "plugin": entry["name"], "kind": "skill",
-                "category": fm.get("category") or cat_map.get(name) or cat_map.get(sk.parent.name) or DEFAULT_CATEGORY,
+                "pkg": entry["name"], "kind": "skill",
+                "folder": fm.get("category") or cat_map.get(name) or cat_map.get(sk.parent.name) or DEFAULT_CATEGORY,
                 "name": name,
                 "description": fm.get("description", ""),
                 "path": str(sk.parent.relative_to(ROOT)),
             })
-        for kind in ("agents", "commands"):
+        for kind, folder in (("agents", "Agents"), ("commands", "Commands")):
             for f in sorted((pdir / kind).glob("*.md")):
                 if f.name == "README.md":
                     continue
                 fm = frontmatter(f)
-                name = fm.get("name", f.stem)
                 items.append({
-                    "group": group, "plugin": entry["name"], "kind": kind[:-1],
-                    "category": fm.get("category") or cat_map.get(name) or DEFAULT_CATEGORY,
-                    "name": name,
+                    "pkg": entry["name"], "kind": kind[:-1], "folder": folder,
+                    "name": fm.get("name", f.stem),
                     "description": fm.get("description", ""),
                     "path": str(f.relative_to(ROOT)),
                 })
-    return mp, items
+    return packages, items
 
 
-def build_readme(mp, items):
+def build_readme(packages, items):
     lines = [
         "# Skill & Agent Marketplace",
         "",
-        f"Claude Code plugin marketplace. {len(items)} items.",
+        f"Claude Code plugin marketplace. {len(items)} items across {len(packages)} packages.",
         "",
         "Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/",
         "",
@@ -76,24 +73,28 @@ def build_readme(mp, items):
         "/plugin marketplace add BrianLee0127/skill-agent-marketplace",
         "```",
         "",
-        "Then run `/plugin` and install the plugin you want.",
+        "Then run `/plugin` and install the package you want. Installing a package gives you everything inside it.",
         "",
     ]
-    for group in dict.fromkeys(i["group"] for i in items):
-        lines += [f"## {group}", ""]
-        gitems = [i for i in items if i["group"] == group]
-        for cat in sorted(dict.fromkeys(i["category"] for i in gitems)):
-            lines += [f"### {cat}", "", "| Type | Name | What it does |", "|---|---|---|"]
-            for i in [x for x in gitems if x["category"] == cat]:
+    for p in packages:
+        pitems = [i for i in items if i["pkg"] == p["name"]]
+        lines += [f"## Package: {p['name']}", "", p["description"], "",
+                  f"Install: `/plugin` then choose **{p['name']}**", ""]
+        if not pitems:
+            lines += ["Nothing here yet.", ""]
+            continue
+        for folder in dict.fromkeys(i["folder"] for i in pitems):
+            lines += [f"### {folder}", "", "| Type | Name | What it does |", "|---|---|---|"]
+            for i in [x for x in pitems if x["folder"] == folder]:
                 lines.append(f"| {i['kind']} | [{i['name']}]({i['path']}) | {i['description'][:170]} |")
             lines.append("")
     lines += ["## Updating (maintainer)", "", "Run `./sync.sh` to publish changes and rebuild this catalog.",
-              "", "Set a skill's category with `category: ...` in its SKILL.md frontmatter, or in `categories.json`.", ""]
+              "", "Set a skill's folder with `category: ...` in its SKILL.md frontmatter, or in `categories.json`.", ""]
     (ROOT / "README.md").write_text("\n".join(lines))
 
 
-def build_html(items):
-    data = json.dumps(items, ensure_ascii=False).replace("</", "<\\/")
+def build_html(packages, items):
+    data = json.dumps({"packages": packages, "items": items}, ensure_ascii=False).replace("</", "<\\/")
     page = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,23 +115,29 @@ def build_html(items):
   }
   input:focus { border-color:var(--accent); }
   .crumbs { margin-bottom:18px; font-size:14px; color:var(--dim); min-height:20px; }
-  .crumbs a { color:var(--accent); text-decoration:none; cursor:pointer; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
-  .folder, .card {
+  .crumbs a { color:var(--accent); text-decoration:none; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+  .folder, .card, .pkg {
     background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px;
     color:inherit; text-decoration:none; display:block; cursor:pointer;
     transition:border-color .2s, transform .2s;
   }
-  .folder:hover, .card:hover { border-color:var(--accent); transform:translateY(-2px); }
-  .folder .ico { font-size:30px; }
+  .folder:hover, .card:hover, .pkg:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .pkg { grid-column: 1 / -1; }
+  .pkg .ico, .folder .ico { font-size:30px; }
+  .pkg h3 { margin-top:10px; font-size:20px; }
+  .pkg .desc { color:var(--dim); font-size:14px; margin-top:4px; }
+  .pkg .inst {
+    margin-top:14px; padding:10px 14px; border-radius:10px; font-size:13px;
+    background:rgba(77,163,255,.1); color:var(--accent); font-family:ui-monospace,monospace;
+  }
+  .pkg .count { float:right; color:var(--dim); font-size:13px; }
   .folder h3 { margin-top:10px; font-size:18px; }
   .folder p { color:var(--dim); font-size:13.5px; margin-top:4px; }
-  .kind, .plug {
+  .kind {
     display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    padding:3px 9px; border-radius:999px; margin-right:6px;
+    padding:3px 9px; border-radius:999px; background:rgba(77,163,255,.14); color:var(--accent);
   }
-  .kind { background:rgba(77,163,255,.14); color:var(--accent); }
-  .plug { background:rgba(255,255,255,.06); color:var(--dim); }
   .card h3 { margin-top:10px; font-size:16.5px; }
   .card p { margin-top:6px; font-size:13.5px; color:var(--dim); }
   .none { color:var(--dim); margin-top:20px; }
@@ -139,8 +146,8 @@ def build_html(items):
 <body>
 <div class="wrap">
   <h1>Skill Catalog</h1>
-  <p class="sub">Install via <code>/plugin marketplace add BrianLee0127/skill-agent-marketplace</code></p>
-  <input id="q" type="search" placeholder="Search all skills..." />
+  <p class="sub">Add the marketplace once: <code>/plugin marketplace add BrianLee0127/skill-agent-marketplace</code></p>
+  <input id="q" type="search" placeholder="Search everything..." />
   <div class="crumbs" id="crumbs"></div>
   <div class="grid" id="grid"></div>
   <p class="none" id="none" style="display:none">Nothing here yet.</p>
@@ -148,54 +155,57 @@ def build_html(items):
 <script>
 const DATA = __DATA__;
 const GH = "__GH__";
-const ICONS = { "External tools": "\\uD83D\\uDCE6", "My own": "\\uD83D\\uDEE0\\uFE0F",
-  "UI & Design": "\\uD83C\\uDFA8", "Backend": "\\u2699\\uFE0F", "MCP & Tools": "\\uD83D\\uDD0C", "Others": "\\uD83D\\uDCC1" };
-const CAT_ORDER = ["UI & Design", "Backend", "MCP & Tools", "Others"];
-const GROUP_LIST = ["External tools", "My own"];
+const ICONS = { "ui-design-skills": "\\uD83C\\uDFA8", "design-skills": "\\uD83C\\uDFA8", "team-toolkit": "\\uD83D\\uDEE0\\uFE0F",
+  "UI & Design": "\\uD83C\\uDFA8", "Backend": "\\u2699\\uFE0F", "MCP & Tools": "\\uD83D\\uDD0C",
+  "Others": "\\uD83D\\uDCC1", "Agents": "\\uD83E\\uDD16", "Commands": "\\u2328\\uFE0F" };
+const FOLDER_ORDER = ["UI & Design", "Backend", "MCP & Tools", "Others", "Agents", "Commands"];
 const grid = document.getElementById("grid"), crumbs = document.getElementById("crumbs"),
       none = document.getElementById("none"), q = document.getElementById("q");
 
 function esc(s){ const d = document.createElement("span"); d.textContent = s; return d.innerHTML; }
 function state(){
   const h = decodeURIComponent(location.hash.replace(/^#\\/?/, ""));
-  const [g, c] = h.split("/");
-  return { g: g || null, c: c || null };
+  const [p, f] = h.split("/");
+  return { p: p || null, f: f || null };
 }
-function folder(icon, title, sub, href){
-  return '<a class="folder" href="' + href + '"><span class="ico">' + icon + "</span><h3>" +
-    esc(title) + "</h3><p>" + esc(sub) + "</p></a>";
+function pkgCard(p){
+  const n = DATA.items.filter(i => i.pkg === p.name).length;
+  return '<a class="pkg" href="#' + encodeURIComponent(p.name) + '">' +
+    '<span class="count">' + n + (n === 1 ? " item" : " items") + '</span>' +
+    '<span class="ico">' + (ICONS[p.name] || "\\uD83D\\uDCE6") + "</span>" +
+    "<h3>" + esc(p.name) + '</h3><p class="desc">' + esc(p.description) + "</p>" +
+    '<div class="inst">Install: /plugin \\u2192 install ' + esc(p.name) + "</div></a>";
+}
+function folderCard(pkg, f){
+  const n = DATA.items.filter(i => i.pkg === pkg && i.folder === f).length;
+  return '<a class="folder" href="#' + encodeURIComponent(pkg) + "/" + encodeURIComponent(f) + '">' +
+    '<span class="ico">' + (ICONS[f] || "\\uD83D\\uDCC1") + "</span><h3>" + esc(f) + "</h3><p>" +
+    n + (n === 1 ? " item" : " items") + "</p></a>";
 }
 function card(i){
   return '<a class="card" href="' + GH + "/tree/main/" + i.path + '" target="_blank" rel="noopener">' +
-    '<span class="kind">' + esc(i.kind) + '</span><span class="plug">' + esc(i.plugin) + "</span>" +
+    '<span class="kind">' + esc(i.kind) + "</span>" +
     "<h3>" + esc(i.name) + "</h3><p>" + esc(i.description.slice(0, 220)) + "</p></a>";
 }
 function render(){
   const t = q.value.trim().toLowerCase();
   let out = "", crumbHtml = "";
   if (t) {
-    const hits = DATA.filter(i => (i.name + " " + i.description + " " + i.category + " " + i.plugin).toLowerCase().includes(t));
+    const hits = DATA.items.filter(i => (i.name + " " + i.description + " " + i.folder + " " + i.pkg).toLowerCase().includes(t));
     out = hits.map(card).join("");
-    crumbHtml = 'Search results (' + hits.length + ') \\u00b7 <a href="#" onclick="q.value=\\'\\';render();return false;">clear</a>';
+    crumbHtml = "Search results (" + hits.length + ")";
   } else {
-    const { g, c } = state();
-    if (!g) {
-      const groups = [...new Set([...GROUP_LIST, ...DATA.map(i => i.group)])];
-      out = groups.map(gr => {
-        const n = DATA.filter(i => i.group === gr).length;
-        return folder(ICONS[gr] || "\\uD83D\\uDCC1", gr, n + " items", "#" + encodeURIComponent(gr));
-      }).join("");
-    } else if (!c) {
-      crumbHtml = '<a href="#">All</a> \\u203a ' + esc(g);
-      const cats = [...new Set(DATA.filter(i => i.group === g).map(i => i.category))]
-        .sort((a, b) => (CAT_ORDER.indexOf(a) + 99) - (CAT_ORDER.indexOf(b) + 99));
-      out = cats.map(cat => {
-        const n = DATA.filter(i => i.group === g && i.category === cat).length;
-        return folder(ICONS[cat] || "\\uD83D\\uDCC1", cat, n + " items", "#" + encodeURIComponent(g) + "/" + encodeURIComponent(cat));
-      }).join("");
+    const { p, f } = state();
+    if (!p) {
+      out = DATA.packages.map(pkgCard).join("");
+    } else if (!f) {
+      crumbHtml = '<a href="#">All packages</a> \\u203a ' + esc(p);
+      const folders = [...new Set(DATA.items.filter(i => i.pkg === p).map(i => i.folder))]
+        .sort((a, b) => (FOLDER_ORDER.indexOf(a) + 99) - (FOLDER_ORDER.indexOf(b) + 99));
+      out = folders.map(fo => folderCard(p, fo)).join("");
     } else {
-      crumbHtml = '<a href="#">All</a> \\u203a <a href="#' + encodeURIComponent(g) + '">' + esc(g) + "</a> \\u203a " + esc(c);
-      out = DATA.filter(i => i.group === g && i.category === c).map(card).join("");
+      crumbHtml = '<a href="#">All packages</a> \\u203a <a href="#' + encodeURIComponent(p) + '">' + esc(p) + "</a> \\u203a " + esc(f);
+      out = DATA.items.filter(i => i.pkg === p && i.folder === f).map(card).join("");
     }
   }
   grid.innerHTML = out;
@@ -212,7 +222,7 @@ render();
     (ROOT / "docs/index.html").write_text(page.replace("__DATA__", data).replace("__GH__", GH))
 
 
-mp, items = collect()
-build_readme(mp, items)
-build_html(items)
-print(f"Catalog rebuilt: {len(items)} items")
+packages, items = collect()
+build_readme(packages, items)
+build_html(packages, items)
+print(f"Catalog rebuilt: {len(items)} items in {len(packages)} packages")

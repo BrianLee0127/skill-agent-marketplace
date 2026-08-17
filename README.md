@@ -1,6 +1,6 @@
 # Skill & Agent Marketplace
 
-Claude Code plugin marketplace. 13 items.
+Claude Code plugin marketplace. 13 items across 2 packages.
 
 Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
@@ -10,15 +10,13 @@ Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 /plugin marketplace add BrianLee0127/skill-agent-marketplace
 ```
 
-Then run `/plugin` and install the plugin you want.
+Then run `/plugin` and install the package you want. Installing a package gives you everything inside it.
 
-## External tools
+## Package: design-skills
 
-### Others
+Design skill pack: premium frontend taste, brand kits, image-gen direction, redesign workflows
 
-| Type | Name | What it does |
-|---|---|---|
-| skill | [full-output-enforcement](design-skills/skills/full-output-enforcement) | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiri |
+Install: `/plugin` then choose **design-skills**
 
 ### UI & Design
 
@@ -37,8 +35,22 @@ Then run `/plugin` and install the plugin you want.
 | skill | [redesign-existing-projects](design-skills/skills/redesign-existing-projects) | Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking func |
 | skill | [stitch-design-taste](design-skills/skills/stitch-design-taste) | Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated c |
 
+### Others
+
+| Type | Name | What it does |
+|---|---|---|
+| skill | [full-output-enforcement](design-skills/skills/full-output-enforcement) | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiri |
+
+## Package: team-toolkit
+
+Skills, agents, and commands created by the team
+
+Install: `/plugin` then choose **team-toolkit**
+
+Nothing here yet.
+
 ## Updating (maintainer)
 
 Run `./sync.sh` to publish changes and rebuild this catalog.
 
-Set a skill's category with `category: ...` in its SKILL.md frontmatter, or in `categories.json`.
+Set a skill's folder with `category: ...` in its SKILL.md frontmatter, or in `categories.json`.
