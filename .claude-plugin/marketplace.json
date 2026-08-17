@@ -1,11 +1,11 @@
 {
-  "name": "tanah-marketplace",
+  "name": "skill-agent-marketplace",
   "owner": { "name": "Brian Lee", "email": "brianlee@webmaxtec.com" },
   "plugins": [
     {
-      "name": "tanah-design",
-      "source": "./tanah-design",
-      "description": "Tanah Co design skill pack: premium frontend taste, brand kits, image-gen direction, redesign workflows"
+      "name": "design-skills",
+      "source": "./design-skills",
+      "description": "Design skill pack: premium frontend taste, brand kits, image-gen direction, redesign workflows"
     }
   ]
 }
