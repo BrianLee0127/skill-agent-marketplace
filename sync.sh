@@ -4,6 +4,19 @@
 set -e
 cd "$(dirname "$0")"
 
+echo "Pulling latest from GitHub ..."
+git pull --rebase
+
+# Warn if the repo has skills that are missing locally (e.g. created on another PC)
+for d in design-skills/skills/*/; do
+  name=$(basename "$d")
+  if [ ! -d "$HOME/.claude/skills/$name" ]; then
+    echo "WARNING: skill '$name' exists in the repo but not in ~/.claude/skills."
+    echo "Syncing now would DELETE it. Copy it to ~/.claude/skills first, or ask Claude to 'pull marketplace skills'."
+    exit 1
+  fi
+done
+
 echo "Copying skills from ~/.claude/skills ..."
 rm -rf design-skills/skills
 cp -R "$HOME/.claude/skills/" design-skills/skills/
