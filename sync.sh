@@ -20,6 +20,9 @@ echo "Copying skills from ~/.claude/skills ..."
 rm -rf design-skills/skills
 cp -RL "$HOME/.claude/skills/" design-skills/skills/
 
+echo "Rebuilding catalog ..."
+python3 scripts/build_catalog.py
+
 if git status --porcelain | grep -q .; then
   NEW_VERSION=$(python3 - <<'EOF'
 import json
