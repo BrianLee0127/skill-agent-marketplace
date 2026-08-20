@@ -1,6 +1,6 @@
 # Skill & Agent Marketplace
 
-Claude Code plugin marketplace. 21 items across 2 packages.
+Claude Code plugin marketplace. 23 items across 2 packages.
 
 Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
@@ -72,7 +72,9 @@ Install: `/plugin` then choose **team-toolkit**
 
 | Type | Name | What it does |
 |---|---|---|
+| agent | [backend-test](team-toolkit/agents/backend-test.md) | Write and run backend tests (xUnit) for a Webmax/TPP ASP.NET Core solution — API endpoints, raw ADO.NET SQL services, server-side validation, OTP/session auth, and the Fi |
 | agent | [project-manager](team-toolkit/agents/project-manager.md) | Use FIRST for any new build request (website, landing page, app, brand, microsite, redesign). It interviews the client about business requirements and whether payments ar |
+| agent | [ui-test](team-toolkit/agents/ui-test.md) | Write and run end-to-end UI tests (Playwright) for a Webmax/TPP ASP.NET Core MVC microsite. Covers page loads, form submission + client validation, the multi-step wizard, |
 
 ## Updating (maintainer)
 

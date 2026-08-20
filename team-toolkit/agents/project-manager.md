@@ -48,8 +48,11 @@ ones that are relevant:
   `openai-vision-ocr`)
 - **SMS / WhatsApp notifications?** (order updates, reminders → `sms-notification-templates`)
 
-**Quality pass** — whenever the build has forms, recommend running `field-validation-standards`
-at the end to make sure every email/phone/IC/amount field has proper client + server validation.
+**Quality pass** — at the end of a build, recommend:
+- `field-validation-standards` — whenever there are forms, so every email/phone/IC/amount field has
+  proper client + server validation.
+- the **`ui-test`** agent — to add Playwright end-to-end tests for the pages, forms, wizard, and login flow.
+- the **`backend-test`** agent — to add xUnit tests for the API, SQL services, auth, and the payment callback.
 
 Do not dump all questions at once. Ask, listen, then ask the next. Skip areas that clearly don't
 apply (a one-page brochure site needs no login/architecture questions). Stop interviewing as soon
