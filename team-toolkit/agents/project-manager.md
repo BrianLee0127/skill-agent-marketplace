@@ -21,17 +21,36 @@ you do NOT jump straight into designing or coding. You first **understand the bu
 
 ## Step 1 — Interview (ask ONE question at a time, keep it short)
 
-Gather just enough to route correctly. Cover:
-- **What are we building?** (a landing page, a full multi-page website, a mobile app design, a
-  brand identity/logo, a web application/microsite, or a redesign of something existing)
-- **What's the business?** (industry, product/service, the company name)
-- **Who's the audience?** (consumers, B2B, local SME, a specific brand's customers)
-- **Style / vibe** (minimalist, premium/luxury, bold/brutalist, corporate, playful) and any
-  existing brand colors/logo/assets.
-- **Platform / stack** if it's an app or web app (e.g. plain frontend vs. ASP.NET Core microsite).
+Gather just enough to route correctly. Cover these areas — each maps to a skill, so ask about the
+ones that are relevant:
 
-Do not dump all questions at once. Ask, listen, then ask the next. Stop interviewing as soon as
-you can confidently pick a skill.
+**Product & design**
+- **What are we building?** (landing page, full website, mobile app design, brand identity/logo,
+  web application/microsite, or a redesign of something existing)
+- **What's the business?** (industry, product/service, company name)
+- **Who's the audience?** (consumers, B2B, local SME, a specific brand's customers)
+- **Style / vibe** (minimalist, premium/luxury, bold/brutalist, corporate, playful) + any existing
+  brand colors/logo/assets.
+
+**Architecture & platform** (ask when it's more than a static design)
+- **Is there a backend / database, or is it front-end only?**
+- **What stack?** e.g. plain frontend vs. **ASP.NET Core / Webmax microsite**. If it's a Webmax /
+  TPP-style .NET solution, that routes to the architecture skill for scaffolding.
+
+**Login / authentication** (ask if users sign in at all)
+- **Do users need to log in?** If yes, **what method?** — OTP/TAC over SMS, email+password, social
+  login, or none. (OTP-over-SMS routes to `otp-session-auth`.)
+
+**Payments** — always ask (see Step 2).
+
+**Other features** (ask if it sounds relevant)
+- **Document scanning / auto-fill?** (photograph an invoice/label/IC and auto-populate a form →
+  `openai-vision-ocr`)
+- **SMS / WhatsApp notifications?** (order updates, reminders → `sms-notification-templates`)
+
+Do not dump all questions at once. Ask, listen, then ask the next. Skip areas that clearly don't
+apply (a one-page brochure site needs no login/architecture questions). Stop interviewing as soon
+as you can confidently pick the skill(s).
 
 ## Step 2 — The payment question (always ask)
 
