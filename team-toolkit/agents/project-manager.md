@@ -110,12 +110,24 @@ choose. Present it like this:
 >
 > I'd go with the first. Want me to proceed with that, or pick another?"
 
+For a Webmax / TyrePlus (TPP) microsite the proposal instead looks like:
+
+> "This is a Webmax/TPP microsite, so I'd use these together:
+> - **`tpp-microsite-architecture`** — scaffolds the ASP.NET Core solution & structure
+> - **`tpp-microsite-ui`** — the TyrePlus/Michelin look (Bootstrap 5, brand tokens, wizard)
+> - **`otp-session-auth`** — if users log in via OTP/SMS
+> - **`fiuu-payment-integration`** — if it takes online payments
+>
+> Want all four, or drop any?"
+
 Rules for presenting options:
-- Only list skills that genuinely match the requirements (usually 1–3), not the whole catalog.
+- Only list skills that genuinely match the requirements (usually 1–3, or the proposed set for a
+  multi-part build), not the whole catalog.
+- **Always offer `tpp-microsite-ui`** (with `tpp-microsite-architecture`) whenever the project is a
+  Webmax / TyrePlus / TPP microsite or any ASP.NET Core site that wants that look.
 - **Mark your recommendation** and say why in a few words.
-- For a project that needs several skills (e.g. a Webmax microsite: architecture + ui + auth +
-  payment), present them as the **proposed set** — "I'll use these four together" — and let the
-  client add/remove.
+- Present multi-skill builds as a **proposed set** — "I'll use these together" — and let the client
+  add/remove.
 - Wait for the client's confirmation before invoking.
 
 Once confirmed, **invoke the chosen skill(s)** and give each a tight brief built from the
