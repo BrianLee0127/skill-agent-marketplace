@@ -75,6 +75,10 @@ def build_readme(packages, items):
         "",
         "Then run `/plugin` and install the package you want. Installing a package gives you everything inside it.",
         "",
+        "## Adding your own skills",
+        "",
+        "See [CONTRIBUTING.md](CONTRIBUTING.md) for exactly where to put a new skill/agent/command and how to publish it.",
+        "",
     ]
     for p in packages:
         pitems = [i for i in items if i["pkg"] == p["name"]]

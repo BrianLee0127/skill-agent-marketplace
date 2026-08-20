@@ -12,6 +12,10 @@ Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
 Then run `/plugin` and install the package you want. Installing a package gives you everything inside it.
 
+## Adding your own skills
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for exactly where to put a new skill/agent/command and how to publish it.
+
 ## Package: design-skills
 
 Design skill pack: premium frontend taste, brand kits, image-gen direction, redesign workflows
