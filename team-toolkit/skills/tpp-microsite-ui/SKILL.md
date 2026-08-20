@@ -1,6 +1,6 @@
 ---
 name: tpp-microsite-ui
-description: TyrePlus/Michelin TPP microsite UI design template for ASP.NET Core MVC + Bootstrap 5. Green/yellow/blue brand tokens, gradient CTAs, form-section cards, 5-step wizard with stepper + summary sidebar, status badges, Leaflet outlet picker, Tom Select/Flatpickr conventions, Razor + virtual-directory-safe URL rules. Use when building or restyling a Webmax microsite so it matches the TPP RHP look-and-feel.
+description: TyrePlus/Michelin TPP microsite UI design template for ASP.NET Core MVC + Bootstrap 5. Green/yellow/blue brand tokens, gradient CTAs, form-section cards, 5-step wizard with stepper + summary sidebar, status badges, Leaflet outlet picker, Tom Select/Flatpickr conventions, Razor + virtual-directory-safe URL rules. Use when building or restyling a Webmax microsite so it matches the TPP RHP look-and-feel. For the project/solution scaffold use the companion skill tpp-microsite-architecture.
 ---
 
 # TPP Microsite UI Design Template
@@ -8,6 +8,8 @@ description: TyrePlus/Michelin TPP microsite UI design template for ASP.NET Core
 You are building UI for a Webmax microsite that must match the TyrePlus/Michelin RHP warranty microsite look-and-feel. Stack: ASP.NET Core 8 MVC (Razor views, no SPA), Bootstrap 5.1 (local under `wwwroot/lib`), jQuery 3.6, Bootstrap Icons (CDN), Tom Select 2.3.1 (CDN), Flatpickr (CDN, per page), Leaflet 1.9.4 (CDN, per page). No build step, no JS modules.
 
 Detailed component CSS/markup excerpts live in [references/components.md](references/components.md) — load it when implementing a specific component (wizard, modals, badges, map picker, etc.).
+
+For the solution/project structure (5-project layout, Program.cs templates, raw-SQL service patterns, session auth), use the companion skill **tpp-microsite-architecture** — this skill covers only the visual/UI layer.
 
 ## 1. Design tokens (put in `:root` of `wwwroot/css/site.css`)
 

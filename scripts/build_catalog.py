@@ -25,11 +25,11 @@ def frontmatter(path):
 
 
 def collect():
-    mp = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
+    mp = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
     cat_file = ROOT / "categories.json"
     cat_map = {}
     if cat_file.exists():
-        cat_map = {k: v for k, v in json.loads(cat_file.read_text()).items() if not k.startswith("_")}
+        cat_map = {k: v for k, v in json.loads(cat_file.read_text(encoding="utf-8")).items() if not k.startswith("_")}
 
     packages, items = [], []
     for entry in mp["plugins"]:
@@ -94,7 +94,7 @@ def build_readme(packages, items):
             lines.append("")
     lines += ["## Updating (maintainer)", "", "Run `./sync.sh` to publish changes and rebuild this catalog.",
               "", "Set a skill's folder with `category: ...` in its SKILL.md frontmatter, or in `categories.json`.", ""]
-    (ROOT / "README.md").write_text("\n".join(lines))
+    (ROOT / "README.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def build_html(packages, items):
@@ -223,7 +223,7 @@ render();
 </body>
 </html>
 """
-    (ROOT / "docs/index.html").write_text(page.replace("__DATA__", data).replace("__GH__", GH))
+    (ROOT / "docs/index.html").write_text(page.replace("__DATA__", data).replace("__GH__", GH), encoding="utf-8")
 
 
 packages, items = collect()
