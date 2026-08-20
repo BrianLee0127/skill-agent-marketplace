@@ -62,6 +62,15 @@ bookings/deposits, or donations?"**
 | **Scaffolding a Webmax/TPP microsite solution** (ASP.NET Core 8 project structure, layers) | `tpp-microsite-architecture` |
 | Ensure **complete, un-truncated code output** on a big generation task | `full-output-enforcement` (as a helper, combine with another) |
 
+### Backend / integration skills (ASP.NET Core)
+
+| The client needs… | Invoke this skill |
+|---|---|
+| **Take payments** — FPX / card checkout (Malaysia), Fiuu (ex-Razer/MOLPay) hosted page | `fiuu-payment-integration` |
+| **OTP / TAC login over SMS** with session auth (no Identity/JWT) | `otp-session-auth` |
+| **Document OCR auto-fill** — snap an invoice/label/tyre sidewall, auto-populate a form | `openai-vision-ocr` |
+| **SMS / WhatsApp notifications** from DB templates | `sms-notification-templates` |
+
 Routing rules:
 - Prefer the **most specific** skill. "Premium landing page" → `high-end-visual-design` or
   `design-taste-frontend`; a Webmax microsite → the two `tpp-microsite-*` skills together.
@@ -78,17 +87,23 @@ it is the specialist. Your value was getting the requirements right and picking 
 
 ## Payments section (when payments are needed)
 
-There is **no payment skill in this marketplace** — payments are an *integration*, not a design
-task. So when the client needs payments:
-1. Still use the matching **design** skill for the UI (checkout page, pricing, cart, etc.).
-2. Separately flag that a real payment/commerce integration must be provisioned — e.g. Stripe for
-   pure payments/subscriptions, or Shopify for a full product catalog + checkout — ideally through
-   the platform's official marketplace/integration rather than hand-wired SDKs.
-3. Tell the client this is a separate step with its own setup (accounts, keys, compliance) and
-   confirm scope before building the checkout UI.
+Payments are a real **integration**, separate from the design. When the client says yes to
+payments, handle it as two tracks:
 
-Never pretend a design skill "adds payments" — it designs the screens; the integration is real
-backend work you must call out.
+1. **UI track** — use the matching **design** skill for the checkout/pricing/cart screens.
+2. **Integration track** — pick the payment skill:
+   - **Malaysian / ASP.NET Core project** (Webmax/TPP or any .NET site, FPX + card) →
+     **`fiuu-payment-integration`** (Fiuu, ex-Razer/MOLPay hosted page). This is the default for
+     this studio's stack.
+   - **Non-.NET / international / subscriptions or a full product catalog** → note that Stripe
+     (payments/subscriptions) or Shopify (catalog + checkout) would be provisioned via the
+     platform's official integration instead — there's no skill for those yet, so flag it as a
+     separate setup.
+3. Always tell the client the integration is its own step with its own setup (merchant account,
+   API keys, callback URLs, compliance) and confirm scope before building the checkout.
+
+Never pretend a design skill "adds payments" — it designs the screens; the payment flow is real
+backend work handled by `fiuu-payment-integration` (or an external gateway you call out).
 
 ## Style of working
 

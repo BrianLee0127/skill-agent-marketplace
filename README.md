@@ -1,6 +1,6 @@
 # Skill & Agent Marketplace
 
-Claude Code plugin marketplace. 16 items across 2 packages.
+Claude Code plugin marketplace. 20 items across 2 packages.
 
 Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
@@ -55,6 +55,10 @@ Install: `/plugin` then choose **team-toolkit**
 
 | Type | Name | What it does |
 |---|---|---|
+| skill | [fiuu-payment-integration](team-toolkit/skills/fiuu-payment-integration) | Integrate the Fiuu (formerly Razer/MOLPay) hosted-page payment gateway (FPX/card, Malaysia) into an ASP.NET Core project. Non-seamless redirect flow with MD5 vcode reques |
+| skill | [openai-vision-ocr](team-toolkit/skills/openai-vision-ocr) | OpenAI Vision OCR auto-fill for ASP.NET Core web forms — photograph/upload a document (invoice, label, tyre sidewall) and auto-populate form fields. Covers the Vision API |
+| skill | [otp-session-auth](team-toolkit/skills/otp-session-auth) | OTP-over-SMS (TAC) login with session-flag auth for ASP.NET Core MVC — no Identity, no JWT. Covers OTP generation/expiry/single-use, auto-signup of new users, mobile numb |
+| skill | [sms-notification-templates](team-toolkit/skills/sms-notification-templates) | DB-templated SMS/WhatsApp notification system for ASP.NET Core — Master_NotificationTemplate lookups by TemplateCode+CompanyID, placeholder substitution ([link]/{TOKEN} s |
 | skill | [tpp-microsite-architecture](team-toolkit/skills/tpp-microsite-architecture) | TPP microsite framework and project-structure scaffold for ASP.NET Core 8. 5-project Clean-Architecture-lite solution (Domain/Application/Infrastructure/API/Web), Web→API |
 
 ### UI & Design
