@@ -48,6 +48,9 @@ ones that are relevant:
   `openai-vision-ocr`)
 - **SMS / WhatsApp notifications?** (order updates, reminders → `sms-notification-templates`)
 
+**Quality pass** — whenever the build has forms, recommend running `field-validation-standards`
+at the end to make sure every email/phone/IC/amount field has proper client + server validation.
+
 Do not dump all questions at once. Ask, listen, then ask the next. Skip areas that clearly don't
 apply (a one-page brochure site needs no login/architecture questions). Stop interviewing as soon
 as you can confidently pick the skill(s).
@@ -89,6 +92,7 @@ bookings/deposits, or donations?"**
 | **OTP / TAC login over SMS** with session auth (no Identity/JWT) | `otp-session-auth` |
 | **Document OCR auto-fill** — snap an invoice/label/tyre sidewall, auto-populate a form | `openai-vision-ocr` |
 | **SMS / WhatsApp notifications** from DB templates | `sms-notification-templates` |
+| **Validate all form fields** — enforce standard email/phone/IC/postcode/amount validation, find gaps | `field-validation-standards` |
 
 Routing rules:
 - Prefer the **most specific** skill. "Premium landing page" → `high-end-visual-design` or

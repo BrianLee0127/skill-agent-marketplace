@@ -1,6 +1,6 @@
 # Skill & Agent Marketplace
 
-Claude Code plugin marketplace. 20 items across 2 packages.
+Claude Code plugin marketplace. 21 items across 2 packages.
 
 Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
@@ -55,6 +55,7 @@ Install: `/plugin` then choose **team-toolkit**
 
 | Type | Name | What it does |
 |---|---|---|
+| skill | [field-validation-standards](team-toolkit/skills/field-validation-standards) | Audit every user-input field in an ASP.NET Core MVC (Webmax/TPP) project and enforce standard, consistent validation — email, Malaysian phone, IC/NRIC, postcode, car plat |
 | skill | [fiuu-payment-integration](team-toolkit/skills/fiuu-payment-integration) | Integrate the Fiuu (formerly Razer/MOLPay) hosted-page payment gateway (FPX/card, Malaysia) into an ASP.NET Core project. Non-seamless redirect flow with MD5 vcode reques |
 | skill | [openai-vision-ocr](team-toolkit/skills/openai-vision-ocr) | OpenAI Vision OCR auto-fill for ASP.NET Core web forms — photograph/upload a document (invoice, label, tyre sidewall) and auto-populate form fields. Covers the Vision API |
 | skill | [otp-session-auth](team-toolkit/skills/otp-session-auth) | OTP-over-SMS (TAC) login with session-flag auth for ASP.NET Core MVC — no Identity, no JWT. Covers OTP generation/expiry/single-use, auto-signup of new users, mobile numb |
