@@ -9,6 +9,11 @@
       "name": "design-skills",
       "source": "./design-skills",
       "description": "Design skill pack: premium frontend taste, brand kits, image-gen direction, redesign workflows"
+    },
+    {
+      "name": "team-toolkit",
+      "source": "./team-toolkit",
+      "description": "Skills, agents, and commands created by the team"
     }
   ]
 }
