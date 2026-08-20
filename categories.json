@@ -13,6 +13,10 @@
   "minimalist-ui": "UI & Design",
   "redesign-existing-projects": "UI & Design",
   "stitch-design-taste": "UI & Design",
+  "fiuu-payment-integration": "Backend",
+  "otp-session-auth": "Backend",
+  "openai-vision-ocr": "Backend",
+  "sms-notification-templates": "Backend",
   "tpp-microsite-architecture": "Backend",
   "tpp-microsite-ui": "UI & Design"
 }
