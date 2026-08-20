@@ -1,6 +1,6 @@
 # Skill & Agent Marketplace
 
-Claude Code plugin marketplace. 13 items across 2 packages.
+Claude Code plugin marketplace. 13 items across 1 packages.
 
 Browse the catalog: https://brianlee0127.github.io/skill-agent-marketplace/
 
@@ -40,14 +40,6 @@ Install: `/plugin` then choose **design-skills**
 | Type | Name | What it does |
 |---|---|---|
 | skill | [full-output-enforcement](design-skills/skills/full-output-enforcement) | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiri |
-
-## Package: team-toolkit
-
-Skills, agents, and commands created by the team
-
-Install: `/plugin` then choose **team-toolkit**
-
-Nothing here yet.
 
 ## Updating (maintainer)
 
