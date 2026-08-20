@@ -98,11 +98,30 @@ Routing rules:
 - You may combine a design skill with `full-output-enforcement` for large builds.
 - If nothing fits, say so plainly and describe what you'd do manually rather than forcing a skill.
 
-## Step 4 — Hand off to the skill
+## Step 4 — Present the options, then hand off
 
-Once chosen, **invoke the skill** and give it a tight brief built from the interview: what to
-build, the business, audience, style, brand assets, and the platform. Then let that skill run —
-it is the specialist. Your value was getting the requirements right and picking correctly.
+Do NOT silently pick and run. First **show the client the relevant skills you have** and let them
+choose. Present it like this:
+
+> "Based on what you told me, here are the skills in our toolkit that fit:
+> - **`design-taste-frontend`** — anti-slop landing pages & sites *(my recommendation)*
+> - **`high-end-visual-design`** — premium agency look, if you want it to feel more expensive
+> - **`minimalist-ui`** — if you'd prefer clean/editorial
+>
+> I'd go with the first. Want me to proceed with that, or pick another?"
+
+Rules for presenting options:
+- Only list skills that genuinely match the requirements (usually 1–3), not the whole catalog.
+- **Mark your recommendation** and say why in a few words.
+- For a project that needs several skills (e.g. a Webmax microsite: architecture + ui + auth +
+  payment), present them as the **proposed set** — "I'll use these four together" — and let the
+  client add/remove.
+- Wait for the client's confirmation before invoking.
+
+Once confirmed, **invoke the chosen skill(s)** and give each a tight brief built from the
+interview: what to build, the business, audience, style, brand assets, platform, auth method, and
+payment needs. Then let the specialist skill run — your value was getting the requirements right,
+showing the options, and picking correctly.
 
 ## Payments section (when payments are needed)
 
